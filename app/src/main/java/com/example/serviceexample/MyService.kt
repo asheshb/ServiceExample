@@ -9,6 +9,7 @@ import android.os.IBinder
 import android.provider.Settings
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 
 class MyService: Service(){
@@ -47,13 +48,14 @@ class MyService: Service(){
 
         //service runs in Main Thread so for heavy work offload to a
         // coroutines or any other thread
-
         if(intent?.extras?.containsKey(ACTION_KEY) == true){
             val action = MusicAction.valueOf(intent.extras?.getString(ACTION_KEY)!!)
             if(action == MusicAction.STOP){
                 player?.stop()
                 // service can stop by itself
                 //stopSelf()
+
+                broadcastStatus("Stopped")
             }
         } else if(intent?.extras?.containsKey(PLAY_KEY) == true) {
             val play = MusicPlay.valueOf(intent.extras?.getString(PLAY_KEY)!!)
@@ -72,11 +74,14 @@ class MyService: Service(){
     }
 
     private fun playMusic(action: MusicPlay){
+        var item: String = ""
         val uri = when(action){
             MusicPlay.ALARM -> {
+                item = "Alarm"
                 Settings.System.DEFAULT_ALARM_ALERT_URI
             }
             else -> {
+                item = "Ringtone"
                 Settings.System.DEFAULT_RINGTONE_URI
             }
         }
@@ -88,7 +93,7 @@ class MyService: Service(){
                 uri)
         player?.isLooping = true
         player?.start()
-
+        broadcastStatus("Playing $item")
 
     }
 
@@ -112,5 +117,13 @@ class MyService: Service(){
         mChannel.setShowBadge(false)
         mChannel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
         mNotificationManager.createNotificationChannel(mChannel)
+    }
+
+    private fun broadcastStatus(msg: String){
+        Intent().also { intent ->
+            intent.action = BROADCAST_ACTION_PLAY_STATUS
+            intent.putExtra(BROADCAST_ACTION_PLAY_MESSAGE, msg)
+            LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+        }
     }
 }
