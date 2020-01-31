@@ -25,6 +25,8 @@
         <receiver android:name=".MyBroadcastReceiver" android:enabled="true" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
+
+                <action android:name="com.example.serviceexample.PLAY_STATUS" />
             </intent-filter>
         </receiver>
         <service

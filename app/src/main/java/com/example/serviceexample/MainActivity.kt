@@ -1,11 +1,11 @@
 package com.example.serviceexample
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
-
+import 	androidx.localbroadcastmanager.content.LocalBroadcastManager
 const val ACTION_KEY = "ACTION_KEY"
 enum class MusicAction{
     STOP
@@ -26,6 +26,12 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.startForegroundService(this, Intent(this, MyService::class.java).apply {
                 putExtra(PLAY_KEY, MusicPlay.RINGTONE.name)
             })
+
+            Intent().also { intent ->
+                intent.action = "com.example.serviceexample.PLAY_STATUS"
+
+                sendBroadcast(intent)
+            }
         }
 
         play_alarm.setOnClickListener{
