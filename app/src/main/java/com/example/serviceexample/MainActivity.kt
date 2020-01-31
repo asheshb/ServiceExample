@@ -3,6 +3,7 @@ package com.example.serviceexample
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val ACTION_KEY = "ACTION_KEY"
@@ -21,22 +22,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        startService(Intent(this, MyService::class.java))
-
         play_ringtone.setOnClickListener{
-            startService(Intent(this, MyService::class.java).apply {
+            ContextCompat.startForegroundService(this, Intent(this, MyService::class.java).apply {
                 putExtra(PLAY_KEY, MusicPlay.RINGTONE.name)
             })
         }
 
         play_alarm.setOnClickListener{
-            startService(Intent(this, MyService::class.java).apply {
+            ContextCompat.startForegroundService(this, Intent(this, MyService::class.java).apply {
                 putExtra(PLAY_KEY, MusicPlay.ALARM.name)
             })
         }
 
         stop_playing.setOnClickListener{
-            startService(Intent(this, MyService::class.java).apply {
+            ContextCompat.startForegroundService(this, Intent(this, MyService::class.java).apply {
                 putExtra(ACTION_KEY, MusicAction.STOP.name)
             })
         }
