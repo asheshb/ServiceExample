@@ -99,24 +99,21 @@ class MyService: Service(){
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun createChannel() {
-        val mNotificationManager = applicationContext
+        val notificationManager = applicationContext
             .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val name: CharSequence = getString(R.string.app_name)
-        // The user-visible name of the channel
-        // The user-visible description of the channel
         val description = "Service example notification channel"
         val importance = NotificationManager.IMPORTANCE_DEFAULT
-        val mChannel = NotificationChannel(
+        val channel = NotificationChannel(
             CHANNEL_ID,
             name,
             importance
         )
-        // Configure the notification channel.
-        mChannel.description = description
-        mChannel.setShowBadge(false)
-        mChannel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
-        mNotificationManager.createNotificationChannel(mChannel)
+        channel.description = description
+        channel.setShowBadge(false)
+        channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+        notificationManager.createNotificationChannel(channel)
     }
 
     private fun broadcastStatus(msg: String){

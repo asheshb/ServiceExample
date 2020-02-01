@@ -25,7 +25,7 @@ const val BROADCAST_ACTION_PLAY_MESSAGE = "BROADCAST_ACTION_PLAY_MESSAGE"
 
 class MainActivity : AppCompatActivity() {
 
-    val broadcastReceiver = object : BroadcastReceiver() {
+    private val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(contxt: Context?, intent: Intent?) {
             when (intent?.action) {
                 BROADCAST_ACTION_PLAY_STATUS -> play_status.text =
