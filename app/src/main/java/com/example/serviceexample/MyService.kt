@@ -14,7 +14,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 
 class MyService: Service(){
     private val CHANNEL_ID = "1000"
-    private val CHANNEL_NAME = ""
 
     private var player: MediaPlayer? = null
 

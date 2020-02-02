@@ -14,9 +14,6 @@ class MyBroadcastReceiver : BroadcastReceiver() {
         if(intent.action == Intent.ACTION_LOCALE_CHANGED){
             //runs on main thread
             Toast.makeText(context, Intent.ACTION_LOCALE_CHANGED, Toast.LENGTH_LONG).show()
-            //
-        } else if(intent.action == "com.example.serviceexample.PLAY_STATUS") {
-            Toast.makeText(context, "com.example.serviceexample.PLAY_STATUS", Toast.LENGTH_LONG).show()
         }
     }
 
