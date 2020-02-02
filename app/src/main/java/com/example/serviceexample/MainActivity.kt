@@ -1,8 +1,8 @@
 package com.example.serviceexample
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -23,25 +23,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         play_ringtone.setOnClickListener{
-            ContextCompat.startForegroundService(this, Intent(this, MyService::class.java).apply {
-                putExtra(PLAY_KEY, MusicPlay.RINGTONE.name)
-            })
+            startForegroundService(PLAY_KEY, MusicPlay.RINGTONE.name)
         }
 
         play_alarm.setOnClickListener{
-            ContextCompat.startForegroundService(this, Intent(this, MyService::class.java).apply {
-                putExtra(PLAY_KEY, MusicPlay.ALARM.name)
-            })
+            startForegroundService(PLAY_KEY, MusicPlay.ALARM.name)
         }
 
         stop_playing.setOnClickListener{
-            ContextCompat.startForegroundService(this, Intent(this, MyService::class.java).apply {
-                putExtra(ACTION_KEY, MusicAction.STOP.name)
-            })
+            startForegroundService(ACTION_KEY, MusicAction.STOP.name)
         }
 
         stop_service.setOnClickListener{
             stopService(Intent(this, MyService::class.java))
         }
+    }
+
+    private fun startForegroundService(key: String, value: String){
+        ContextCompat.startForegroundService(this, Intent(this, MyService::class.java).apply {
+            putExtra(key, value)
+        })
     }
 }
