@@ -22,25 +22,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         play_ringtone.setOnClickListener{
-            startService(Intent(this, MyService::class.java).apply {
-                putExtra(PLAY_KEY, MusicPlay.RINGTONE.name)
-            })
+            startService(PLAY_KEY, MusicPlay.RINGTONE.name)
         }
 
         play_alarm.setOnClickListener{
-            startService(Intent(this, MyService::class.java).apply {
-                putExtra(PLAY_KEY, MusicPlay.ALARM.name)
-            })
+            startService(PLAY_KEY, MusicPlay.ALARM.name)
         }
 
         stop_playing.setOnClickListener{
-            startService(Intent(this, MyService::class.java).apply {
-                putExtra(ACTION_KEY, MusicAction.STOP.name)
-            })
+            startService(ACTION_KEY, MusicAction.STOP.name)
         }
 
         stop_service.setOnClickListener{
             stopService(Intent(this, MyService::class.java))
         }
+    }
+
+    private fun startService(key: String, value: String){
+        startService(Intent(this, MyService::class.java).apply {
+            putExtra(key, value)
+        })
     }
 }
