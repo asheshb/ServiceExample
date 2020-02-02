@@ -1,8 +1,8 @@
 package com.example.serviceexample
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val ACTION_KEY = "ACTION_KEY"
@@ -20,8 +20,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        startService(Intent(this, MyService::class.java))
 
         play_ringtone.setOnClickListener{
             startService(Intent(this, MyService::class.java).apply {
