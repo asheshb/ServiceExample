@@ -5,13 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.widget.Toast
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-
-private const val TAG = "MyBroadcastReceiver"
-
 class MyBroadcastReceiver : BroadcastReceiver() {
     private var pendingResult: PendingResult? = null
 
@@ -29,7 +22,7 @@ class MyBroadcastReceiver : BroadcastReceiver() {
 //               showToast(context)
 //           }
 //        }
-//        //if need more time to finish. Still we are expected to finish under 10 seconds
+//        //if need more time to finish. We are expected to finish under 10 seconds
 //        pendingResult = goAsync()
 //    }
 //
