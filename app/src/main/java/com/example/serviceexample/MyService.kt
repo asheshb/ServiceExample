@@ -21,18 +21,18 @@ class MyService: Service(){
 
         // service runs in Main Thread so for heavy work offload to background thread
         if(intent?.extras?.containsKey(ACTION_KEY) == true){
-            val action = MusicAction.valueOf(intent.extras?.getString(ACTION_KEY)!!)
+            val action = MusicAction.valueOf(intent.getStringExtra(ACTION_KEY)!!)
             if(action == MusicAction.STOP){
                 player?.stop()
                 // service can stop by itself
                 //stopSelf()
             }
         } else if(intent?.extras?.containsKey(PLAY_KEY) == true) {
-            val play = MusicPlay.valueOf(intent.extras?.getString(PLAY_KEY)!!)
+            val play = MusicPlay.valueOf(intent.getStringExtra(PLAY_KEY)!!)
             playMusic(play)
         }
 
-        //Restart the activity if system kills it for some reason
+        //Restart the service if system kills it for some reason
         return START_STICKY
     }
 
