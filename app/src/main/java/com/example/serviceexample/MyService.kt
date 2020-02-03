@@ -73,7 +73,7 @@ class MyService: Service(){
     }
 
     private fun playMusic(action: MusicPlay){
-        var item: String = ""
+        val item: String
         val uri = when(action){
             MusicPlay.ALARM -> {
                 item = "Alarm"
