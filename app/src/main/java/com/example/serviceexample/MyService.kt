@@ -25,6 +25,7 @@ class MyService: Service(){
     override fun onCreate() {
         super.onCreate()
 
+        // API 26
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel()
         }
@@ -35,11 +36,12 @@ class MyService: Service(){
             0, notificationIntent, 0
         )
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("My Service Running")
+            .setContentTitle(getString(R.string.my_service_running))
             .setContentText(getString(R.string.app_name))
             .setSmallIcon(R.mipmap.ic_launcher)
             .setContentIntent(pendingIntent)
             .build()
+        //needs to be called within 5 seconds of call to foreground service
         startForeground(1, notification)
     }
 
